@@ -82,13 +82,14 @@ namespace NCM2MP3
 
             // skip 2 character
             fs.Seek(2, SeekOrigin.Current);
+
             var keylength = new byte[4];
 
             // read key length
             fs.Read(keylength, 0, keylength.Length);
             Debug.WriteLine(Encoding.ASCII.GetString(keylength));
 
-            // sort array then combine then to a new hex string then parse to int 
+            // sort array then combine them to a new hex string then parse to int 
             Array.Sort(keylength);
             var keylen = Convert.ToInt32("0x" + string.Join("", keylength.Select(s => s.ToString("X"))), 16);
             var keydata = new byte[keylen];
